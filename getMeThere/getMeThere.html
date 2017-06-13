@@ -1,0 +1,50 @@
+<form class="container-fluid col-offeset-1" name="forgotForm">
+    <div class="panel margin-tp-1 opacity1">
+        <div class="panel-body">
+            <div class="col-xs-12">
+                <div class="col-xs-4">
+                    <input type="text" ng-model="vdo.query" placeholder="Search for places" uib-typeahead="predictions.description for predictions in getAutoComplete($viewValue,vdo)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control" typeahead-on-select="selectedValue(vdo)">
+                    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                    <div ng-show="noResults">
+                        <i class="glyphicon glyphicon-remove"></i> No Results Found
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <button ng-disabled="!vdo.query" type="button" class="btn btn-primary" ng-click="getPlaceData(vdo)">Search</button>
+                </div>
+                <div class="col-xs-1">
+                    <button  type="button" class="btn btn-warning" ng-click="reset()">Reset</button>
+                </div>
+            </div>
+            <div class="col-xs-12 margin-tp-1">
+                <table class="table table-format table-bordered" ng-if="vdo.places.length">
+                    <thead>
+                        <tr>
+                            <th>Icon</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Rating</th>
+                            <th>Types</th>
+                            <th>Vicinity</th>
+                            <th>Opened</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat=" place in vdo.places">
+                        <tr>
+                            <td><img ng-src="{{place.icon}}" class="imgSize"></td>
+                            <td>{{place.name}}</td>
+                            <td>{{place.formatted_address}}</td>
+                            <td>{{place.rating}}</td>
+                            <td>{{place.types.toString()}}</td>
+                            <td>{{place.vicinity}}</td>
+                            <td>
+                                <p ng-if="place.opening_hours.open_now">Open Now</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h5 ng-if="!vdo.places.length && vdo.searched">No search results found</h5>
+            </div>
+        </div>
+    </div>
+</form>

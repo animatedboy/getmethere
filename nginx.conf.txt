@@ -1,0 +1,25 @@
+server {
+        listen       *:90;
+        server_name  getMethere.com
+        gzip on;
+        gzip_disable "MSIE [1-6]\.(?!.*SV1)";
+        gzip_types      text/plain application/json application/x-javascript;  
+
+        underscores_in_headers on;
+        ignore_invalid_headers off;
+      
+        location / {
+           root  D:\prasad\getMeThere;
+           index  index.html index.htm;
+        }
+        
+
+        location /maps/ {         
+            proxy_set_header X-NginX-Proxy true;
+            proxy_pass https://maps.googleapis.com/maps/;
+            proxy_pass_request_headers      on;
+            proxy_redirect off;
+        }
+
+      
+    }
