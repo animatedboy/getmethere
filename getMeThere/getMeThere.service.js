@@ -5,11 +5,25 @@ var getMeThereService = function(serRestApi) {
         radius: 3000
     };
 
+    /*getAutoComplete 
+   
+    @param vdo value of visual data object
+
+    fetches User location
+    */
+
     this.getLocation = function(vdo) {
         navigator.geolocation.getCurrentPosition(function(pos) {
             vdo.location = pos.coords.latitude + ',' + pos.coords.longitude;
         });
     };
+
+    /*getAutoComplete 
+    @param viewValue value from eneterd input
+    @param vdo value of visual data object
+
+    fetches autoComplete from the service
+    */
 
     this.getAutoComplete = function(vdo) {
         var queryParams = {
@@ -22,6 +36,13 @@ var getMeThereService = function(serRestApi) {
             return response.data.predictions;
         });
     };
+
+    /*getAutoComplete 
+    @param viewValue value from eneterd input
+    @param vdo value of visual data object
+
+    fetches autoComplete from the service
+    */
 
     this.getPlaceData = function(vdo) {
         var queryParams = {
